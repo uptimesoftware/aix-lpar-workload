@@ -15,7 +15,7 @@ None; no agent required.
 ### Installation Notes
 NOTE: This is ONLY supported on the listed version(s) of up.time. Do not install on older/newer versions unless they're specifically stated. For more clarification or assistance, please contact support.
 
-Install using the up.time Plugin Manager.
+[Install using the up.time Plugin Manager](https://github.com/uptimesoftware/uptime-plugin-manager)
 
 On a POSIX Monitoring Station, keyless SSH needs to be configured connected from the Monitoring Station to the HMC. 
 
@@ -23,15 +23,15 @@ Add this monitor to the pSeries frame.
 
 
 ### Input Variables
-*Username: username to be used to connect to the HMC
-*Password (Windows only): password to be used to connect to the HMC
+* Username: username to be used to connect to the HMC
+* Password (Windows only): password to be used to connect to the HMC
 
 ### Output Variables
-*Chassis CPU Utilization (%)
-*Chassis CPU Utilization (CPU unit)
-*LPAR CPU Utilization (%)
-*LPAR CPU Utilization (CPU unit)
-*Response Time (ms)
+* Chassis CPU Utilization (%)
+* Chassis CPU Utilization (CPU unit)
+* LPAR CPU Utilization (%)
+* LPAR CPU Utilization (CPU unit)
+* Response Time (ms)
 
 ### Languages Used
 Shell / Batch, PHP, Java
