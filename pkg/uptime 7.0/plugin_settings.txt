@@ -1,0 +1,6 @@
+name=AIX LPAR Workload
+version=2.0
+platforms=windows linux solaris
+description=This monitors connect to the HMC to get LPAR utilization metrics.
+requiresAgentScript=false
+restartCore=true
