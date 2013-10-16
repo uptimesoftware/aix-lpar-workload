@@ -7,21 +7,21 @@ See http://uptimesoftware.github.io for more information.
 
 ### Category
 
-{ page.category }}
+plugin
 
 ### Version Compatibility
 
 
   
-    * AIX LPAR Workload Monitor 3.1 - 7.2, 7.1
+* AIX LPAR Workload Monitor 3.1 - 7.2, 7.1
   
 
   
-    * AIX LPAR Workload Monitor 2.0 - 7.0
+* AIX LPAR Workload Monitor 2.0 - 7.0
   
 
   
-    * AIX LPAR Workload Monitor 1.1 - 5.5
+* AIX LPAR Workload Monitor 1.1 - 5.5
   
 
 
@@ -50,12 +50,31 @@ None; no agent required
 
 
 ### Input Variables
-* Username; username to be used to connect to the HMC* Password (Windows only); password to be used to connect to the HMC
+
+* Username; username to be used to connect to the HMC
+
+* Password (Windows only); password to be used to connect to the HMC
+
 
 ### Output Variables
 
-* Chassis CPU Utilization (%)* Chassis CPU Utilization (CPU unit)* LPAR CPU Utilization (%)* LPAR CPU Utilization (CPU unit)* Response Time (ms)
+
+* Chassis CPU Utilization (%)
+
+* Chassis CPU Utilization (CPU unit)
+
+* LPAR CPU Utilization (%)
+
+* LPAR CPU Utilization (CPU unit)
+
+* Response Time (ms)
+
 
 ### Languages Used
-* Shell/Batch* PHP* Java
+
+* Shell/Batch
+
+* PHP
+
+* Java
 
