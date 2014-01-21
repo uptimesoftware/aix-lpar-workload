@@ -1,3 +1,7 @@
 #!/bin/sh
-../../apache/bin/php AIX_LPAR_Workload_Monitor.php
 
+inst=`grep ^inst /etc/init.d/uptime_httpd | cut -d= -f2`
+MIBDIRS=$inst/mibs
+export MIBDIRS
+
+/usr/local/uptime/apache/bin/php AIX_LPAR_Workload_Monitor.php
