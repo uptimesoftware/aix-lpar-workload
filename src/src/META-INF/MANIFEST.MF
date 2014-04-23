@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Built-By: plui
+Build-Jdk: 1.7.0_09
+Plugin-Class: com.uptimesoftware.uptime.plugin.MonitorAIXLPARWorkload
+Plugin-Version: 6.0
+Plugin-Id: monitor-aix-lpar-workload
+Plugin-Provider: Uptime Software
+

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uptime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.uptimesoftware.com/erdc/erdc erdc" xmlns="http://www.uptimesoftware.com/erdc/erdc" xmlns:upt="http://www.uptimesoftware.com/erdc/erdc" version="4.0" target_grouping="other">
+	<class>AIX LPAR Workload</class>
+	<exec>JAVA_PLUGIN:UptimeMonitorAIXLPARWorkload</exec>
+	<erdc_version>4.0</erdc_version>
+    <category>Operating System Monitors</category>
+    <category_related></category_related>
+    <grid_info>
+        <supported_versions>7.3</supported_versions>
+        <supported_platforms>windows, linux</supported_platforms>
+        <upgrade_in_place>true</upgrade_in_place>
+        <requires_agent_scripts>false</requires_agent_scripts>
+    </grid_info>
+	<elements>
+		<element name='username' parameter_type='input' data_type='string' gui_basic='1' range_type='0' units=''>
+			<control_options>size:8</control_options>
+			<default_value></default_value>
+			<validation_rule/><error_message/>
+			<short_description>Username</short_description>
+			<long_description>Username to login to the HMC.  Need to have keyless-ssh configured.</long_description>
+			<error_message><alphanumeric>required field</alphanumeric></error_message>
+			<gui_type><string/></gui_type>
+		</element>
+		<element name='password' parameter_type='input' data_type='string' gui_basic='1' range_type='0' units=''>
+			<control_options>size:8</control_options>
+			<default_value></default_value>
+			<validation_rule/><error_message/>
+			<short_description>Password</short_description>
+			<long_description>Password</long_description>
+			<error_message><alphanumeric>required field</alphanumeric></error_message>
+			<gui_type><password/></gui_type>
+		</element>
+		<element name='chassisUtilPCT' parameter_type='output' data_type='decimal' gui_basic='' range_type='0' units='%'>
+			<control_options>size:8</control_options>
+			<default_value></default_value>
+			<short_description>Chassis CPU Utilization(%)</short_description>
+			<long_description>The percent of CPU resources that were used since the last query.</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type><decimal/></gui_type>
+		</element>
+		<element name='chassisUtilUNITS' parameter_type='output' data_type='decimal' gui_basic='' range_type='0' units='unit'>
+			<control_options>size:8</control_options>
+			<default_value></default_value>
+			<short_description>Chassis CPU Utilization(unit)</short_description>
+			<long_description>The unit of CPU resources that were used since the last query.</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type><decimal/></gui_type>
+		</element>
+		<element name='usedPCT' parameter_type='output' data_type='ranged' gui_basic='' range_type='0' units='%'>
+			<control_options>size:8</control_options>
+			<default_value></default_value>
+			<short_description>LPAR CPU Utilization(%)</short_description>
+			<long_description>The LPAR's CPU Utilization in Percent.</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type><decimal/></gui_type>
+		</element>
+		<element name='usedUNITS' parameter_type='output' data_type='ranged' gui_basic='' range_type='0' units='unit'>
+			<control_options>size:8</control_options>
+			<default_value></default_value>
+			<short_description>LPAR CPU Utilization(unit)</short_description>
+			<long_description>The LPAR's CPU Utilization in CPU unit.</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type><decimal/></gui_type>
+		</element>
+		<element name="timer" parameter_type="output" data_type="integer" gui_basic="0" range_type="0" units="ms">
+			<control_options>size:8</control_options>
+			<default_value/>
+			<short_description>Response time</short_description>
+			<long_description>Response time in ms</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type><integer/></gui_type>
+		</element>
+	</elements>
+	<help>When running a custom script check, note that the second parameter is always the name of the assigned host. The script that's executed should output each variable on it's own line, otherwise up.time won't be able to capture the appropriate information.</help>
+</uptime>
+
+
+
+
