@@ -16,7 +16,7 @@
 			<control_options>size:8</control_options>
 			<default_value></default_value>
 			<validation_rule/><error_message/>
-			<short_description>Username</short_description>
+			<short_description>HMC Username</short_description>
 			<long_description>Username to login to the HMC.  Need to have keyless-ssh configured.</long_description>
 			<error_message><alphanumeric>required field</alphanumeric></error_message>
 			<gui_type><string/></gui_type>
@@ -25,7 +25,7 @@
 			<control_options>size:8</control_options>
 			<default_value></default_value>
 			<validation_rule/><error_message/>
-			<short_description>Password</short_description>
+			<short_description>HMC Password</short_description>
 			<long_description>Password</long_description>
 			<error_message><alphanumeric>required field</alphanumeric></error_message>
 			<gui_type><password/></gui_type>
@@ -76,7 +76,7 @@
 			<gui_type><integer/></gui_type>
 		</element>
 	</elements>
-	<help>When running a custom script check, note that the second parameter is always the name of the assigned host. The script that's executed should output each variable on it's own line, otherwise up.time won't be able to capture the appropriate information.</help>
+	<help>This plugin gathers CPU utilization across all LPAR's for a given pSeries server. The data collection is synchronized to ensure the stacked data points are accurate. This plugin uses the "lslparutil" command on the HMC to gather the utilization metrics.</help>
 </uptime>
 
 

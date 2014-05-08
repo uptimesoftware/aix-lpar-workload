@@ -34,6 +34,7 @@ public class MonitorAIXLPARWorkload extends Plugin {
         super(wrapper);
     }
 
+	// Example of array list of object
 	// http://beginnersbook.com/2013/12/java-arraylist-of-object-sort-example-comparable-and-comparator/
 	public static class Lpar {
 		private String name;
@@ -91,12 +92,11 @@ public class MonitorAIXLPARWorkload extends Plugin {
 		private String frameName = "";
 		private String hmcName = "";
 		
+		// lslparutil returns only the current utilization unless user defines the start and end time
+		// Therefore, define the offset here so we can calculate the start and end time
 		private int second_offset = -600;
 		Calendar currentDate = Calendar.getInstance();
 		Calendar currentDateWithOffset = Calendar.getInstance();
-		//currentDateWithOffset.add(java.util.Calendar.SECOND, second_offset);
-		
-
 
 		/*
 		 * Set parameters reads the input values from the XML that defines the monitor
@@ -145,7 +145,7 @@ public class MonitorAIXLPARWorkload extends Plugin {
 
 			try {
 				Connection conn = getUptimeDatabaseConnection();
-				//Get pSeries Frame Name
+				// Query to get pSeries Frame Name
 				PreparedStatement stmt = conn.prepareStatement("select erp.value from entity e " +
 									"join erdc_instance ei on e.entity_id = ei.entity_id " +
 									"join erdc_request_parameter erp on ei.configuration_id = erp.configuration_id " +
@@ -164,7 +164,7 @@ public class MonitorAIXLPARWorkload extends Plugin {
 				}				
 				logger.debug("MonitorAIXLPARWorkload: frameName=" + frameName );
 				
-				//Get HMC
+				// Query to get HMC
 				stmt = conn.prepareStatement("select erp.value from entity e " +
 									"join erdc_instance ei on e.entity_id = ei.entity_id " +
 									"join erdc_request_parameter erp on ei.configuration_id = erp.configuration_id " +
@@ -184,7 +184,7 @@ public class MonitorAIXLPARWorkload extends Plugin {
 				logger.debug("MonitorAIXLPARWorkload: hmcName=" + hmcName );
 				
 				
-				
+				// Create SSH Session 
 				JSch jsch=new JSch();
 				logger.debug("MonitorAIXLPARWorkload: JSch jsch=new JSch()");
 				logger.debug("MonitorAIXLPARWorkload: start---- hmcName:" + hmcName + " username:" + username + " port:" + port);
@@ -200,10 +200,14 @@ public class MonitorAIXLPARWorkload extends Plugin {
 				
 				logger.debug("MonitorAIXLPARWorkload: channel connected/closed/eof: " + channel.isConnected() + "/" + channel.isClosed() + "/"
                                                 + channel.isEOF());
+												
+				// Calculate the start date
 				currentDateWithOffset.add(Calendar.SECOND, second_offset);
 				int currentMonth = currentDate.get(Calendar.MONTH) + 1;
 				int currentMonthWithOffset = currentDateWithOffset.get(Calendar.MONTH) + 1;
 				logger.debug("MonitorAIXLPARWorkload: currentDateWithOffset=" + currentDateWithOffset.getTime() + " currentDate=" + currentDate.getTime() + " currentDateWithOffset.get(Calendar.MONTH)=" + currentDateWithOffset.get(Calendar.MONTH) + " Integer.valueOf(currentDateWithOffset.get(Calendar.MONTH))=" + Integer.valueOf(currentDateWithOffset.get(Calendar.MONTH)));
+				
+				// Set the command to send to HMC to get the frame's utilization
 				sshCommand = "lslparutil -r pool -m " + frameName + 
 								" --startyear " + currentDateWithOffset.get(Calendar.YEAR) +
 								" --startmonth " + currentMonthWithOffset +
@@ -218,8 +222,7 @@ public class MonitorAIXLPARWorkload extends Plugin {
 				logger.debug("MonitorAIXLPARWorkload: sending command: " + sshCommand);
 				((ChannelExec)channel).setCommand(sshCommand);			
 				
-				//logger.debug("MonitorAIXLPARWorkload: channel connected/closed/eof: " + channel.isConnected() + "/" + channel.isClosed() + "/"
-                //                                + channel.isEOF());
+
 				logger.debug("MonitorAIXLPARWorkload: sending command: " + sshCommand);
 				
 				InputStream in = channel.getInputStream();
@@ -235,6 +238,7 @@ public class MonitorAIXLPARWorkload extends Plugin {
 				}
 				channel.disconnect();
 				
+				// Parse the output of lslparutil to find the frame's utilizations
 				String[] outputArray = output.split("[\\r\\n]+");
 				for(int i = 0; i < outputArray.length; i++) {
 					logger.debug("MonitorAIXLPARWorkload: outputArray[" + i + "]=" + outputArray[i]);
@@ -263,7 +267,7 @@ public class MonitorAIXLPARWorkload extends Plugin {
 				
 				
 				
-				
+				// Send this command to the HMC to get the LPAR's utilizations
 				sshCommand = "lslparutil -r lpar -m " + frameName + 
 								" --startyear " + currentDateWithOffset.get(Calendar.YEAR) +
 								" --startmonth " + currentMonthWithOffset +
@@ -313,14 +317,6 @@ public class MonitorAIXLPARWorkload extends Plugin {
 													currentLpar.getEntitledCycles() - Double.parseDouble(metrics[2]), 
 													currentLpar.getCappedCycles() - Double.parseDouble(metrics[3]), 
 													currentLpar.getUncappedCycles() - Double.parseDouble(metrics[4]), true);
-							// Do the math here
-							/*
-							lparResults.add(new Lpar(currentLpar.getName(), 
-													currentLpar.getProcUnit(), 
-													currentLpar.getEntitledCycles() - Double.parseDouble(metrics[2]), 
-													currentLpar.getCappedCycles() - Double.parseDouble(metrics[3]), 
-													currentLpar.getUncappedCycles() - Double.parseDouble(metrics[4]), true));
-													*/
 							lparResults.add(tmpLpar);
 							currentLpar.setLatestResult(true);
 							logger.debug("MonitorAIXLPARWorkload: found matching LPAR currentLpar=" + currentLpar.getName());
@@ -332,10 +328,9 @@ public class MonitorAIXLPARWorkload extends Plugin {
 					}
 				}
 				
-				//PluginMonitorVariable result = new PluginMonitorVariable();
-				//ArrayList<PluginMonitorVariable> results = ArrayList<new PluginMonitorVariable>();
-				Double usedPCT;
 				
+				// Calculate various utilization metrics and add them to monitor variable
+				Double usedPCT;				
 				for(Lpar currentLpar : lparResults) {
 					PluginMonitorVariable resultUsedPCT = new PluginMonitorVariable();
 					resultUsedPCT.setName("usedPCT");
