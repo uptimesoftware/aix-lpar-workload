@@ -31,7 +31,7 @@ This plugin gathers CPU utilization across all LPAR's for a given pSeries server
 
 ### Supported Monitoring Stations
 
-7.2, 7.1
+7.3, 7.5, 7.4, 7.6, 7.2, 7.1
 
 ### Supported Agents
 None; no agent required
