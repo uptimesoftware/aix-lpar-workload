@@ -13,7 +13,7 @@ plugin
 
 
   
-* AIX LPAR Workload Monitor 3.1 - 7.2, 7.1
+* AIX LPAR Workload Monitor 3.1 - 7.7 - 7.1
   
 
   
@@ -37,8 +37,7 @@ This plugin gathers CPU utilization across all LPAR's for a given pSeries server
 None; no agent required
 
 ### Installation Notes
-<p>NOTE: This is ONLY supported on the listed version(s) of up.time. Do not install on older/newer versions unless they're specifically stated. For more clarification or assistance, please contact support.
-<a href="https://github.com/uptimesoftware/uptime-plugin-manager">Install using the up.time Plugin Manager</a></p>
+<p>NOTE: This is ONLY supported on the listed version(s) of Uptime Infrastructure Monitor. Do not install on older/newer versions unless they're specifically stated. For more clarification or assistance, please contact support.
 
 <p>On a POSIX Monitoring Station, keyless SSH needs to be configured connected from the Monitoring Station to the HMC.</p>
 
